@@ -30,7 +30,7 @@ void setup() {
   if (pms.read(data)) {
     pm25 = data.PM_AE_UG_2_5;
     pm10 = data.PM_AE_UG_10_0;
-    pm_data = "{\"sensor_2_5\": " + pm25 + ", \"sensor_10\": " + pm10 + " }";
+    pm_data = "{\"sensor_2_5\": " + String(pm25) + ", \"sensor_10\": " + String(pm10) + " }";
   } else {
     pm_data = "{\"sensor_2_5\": 0, \"sensor_10\": 0}";
   }
