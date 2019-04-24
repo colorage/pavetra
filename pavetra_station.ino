@@ -10,7 +10,7 @@
 int deviceId = 601;
 int pm25;
 int pm10;
-String pm_data
+String pm_data;
 
 PMS pms(Serial);
 PMS::DATA data;
