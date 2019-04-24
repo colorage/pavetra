@@ -25,7 +25,7 @@ void setup() {
 
   // === Connect to Internet ===
   WiFiManager wifiManager;
-  wifiManager.autoConnect("Pavetra");
+  wifiManager.autoConnect("pavetra");
 
   // === Get PM data ===
   delay(10000);
