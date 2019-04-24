@@ -21,6 +21,7 @@ void setup() {
   wifiManager.autoConnect("pavetra");
 
   // === Get PM data ===
+  pms.wakeUp();
   delay(30*1000);
   if (pms.readUntil(data)) {
     pm25 = data.PM_AE_UG_2_5;
@@ -45,6 +46,5 @@ void setup() {
   ESP.deepSleep(20*60*1000*1000); // Sleep 20 minutes
 }
 
-void loop() {
-  
+void loop() {  
 }
