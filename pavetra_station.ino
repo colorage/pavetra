@@ -15,19 +15,13 @@ PMS::DATA data;
 
 void setup() {
   Serial.begin(9600); 
-  pinMode(2, OUTPUT);
-
-  // === Turn ON LED ===
-  digitalWrite(2, LOW); 
-  delay(2000);
 
   // === Connect to Internet ===
   WiFiManager wifiManager;
   wifiManager.autoConnect("pavetra");
 
   // === Get PM data ===
-  delay(10000);
-  if (pms.read(data)) {
+  if (pms.readUntil(data)) {
     pm25 = data.PM_AE_UG_2_5;
     pm10 = data.PM_AE_UG_10_0;
     pm_data = "{\"sensor_2_5\": " + String(pm25) + ", \"sensor_10\": " + String(pm10) + " }";
@@ -35,15 +29,14 @@ void setup() {
     pm_data = "{\"sensor_2_5\": 0, \"sensor_10\": 0}";
   }
   
-  
   // === HTTPS Request ===
   HTTPClient http;
   http.begin("http://pavetra.online/devices/data");
-  http.addHeader("Authorization", "Token ***");
+  http.addHeader("Authorization", "Token eyJhbGciOiJIUzI1NiJ9.eyJkZXZpY2VfaWQiOjQsImV4cCI6MTU4NDAyNDQzOH0.4GauS8uDUhX8LfGbGLL2VZ9ZeO6j7C4uXAj2RoLx3XU");
   int httpCode = http.POST(pm_data);
 
   http.end();
-  
+
   // === Sleep Mode ===
   ESP.deepSleep(1*60*1000*1000); // Sleep 1 minute
 }
