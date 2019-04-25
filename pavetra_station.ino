@@ -5,7 +5,6 @@
 
 #include "PMS.h"
 
-int deviceId = 601;
 int pm25;
 int pm10;
 String pm_data;
