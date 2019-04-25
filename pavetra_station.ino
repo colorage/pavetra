@@ -5,7 +5,7 @@
 
 #include "PMS.h"
 
-int deviceId = 601; // Specific ID
+int deviceId = 601;
 int pm25;
 int pm10;
 String pm_data;
@@ -18,7 +18,7 @@ void setup() {
   
   // === Connect to Internet ===
   WiFiManager wifiManager;
-  wifiManager.autoConnect("pavetra");
+  wifiManager.autoConnect("pavetra");  
 
   // === Get PM data ===
   pms.wakeUp();
@@ -37,14 +37,16 @@ void setup() {
   HTTPClient http;
   http.begin("http://pavetra.online/devices/data");
   http.addHeader("Authorization", "Token ***");
+  http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(pm_data);
   http.end();
 
   
   // === Sleep Mode ===
   pms.sleep();
-  ESP.deepSleep(20*60*1000*1000); // Sleep 20 minutes
+  ESP.deepSleep(20*60*1000*1000); // Sleep 1 minute
 }
 
-void loop() {  
+void loop() {
+  
 }
