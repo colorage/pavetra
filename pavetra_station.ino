@@ -43,7 +43,7 @@ void setup() {
   
   // === Sleep Mode ===
   pms.sleep();
-  ESP.deepSleep(20*60*1000*1000); // Sleep 1 minute
+  ESP.deepSleep(20*60*1000*1000); // Sleep 20 minutes
 }
 
 void loop() {
