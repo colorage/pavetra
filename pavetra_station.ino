@@ -5,8 +5,8 @@
 
 #include "PMS.h"
 
-int pm25;
-int pm10;
+int pm25 = 0;
+int pm10 = 0;
 String pm_data;
 
 PMS pms(Serial);
@@ -22,14 +22,17 @@ void setup() {
   // === Get PM data ===
   pms.wakeUp();
   delay(30*1000);
-  if (pms.readUntil(data)) {
-    pm25 = data.PM_AE_UG_2_5;
-    pm10 = data.PM_AE_UG_10_0;
-    pm_data = "{\"sensor_2_5\": " + String(pm25) + ", \"sensor_10\": " + String(pm10) + " }";
-  } else {
-    pm_data = "{\"sensor_2_5\": 0, \"sensor_10\": 0}";
+  int i = 0;
+  while (i < 10) {
+    if (pms.readUntil(data)) {
+      pm25 += data.PM_AE_UG_2_5;
+      pm10 += data.PM_AE_UG_10_0;
+      i++;
+    } else {
+      pm_data = "{\"sensor_2_5\": 0, \"sensor_10\": 0}";
+    }
   }
-
+  pm_data = "{\"sensor_2_5\": " + String(pm25 / 10.0) + ", \"sensor_10\": " + String(pm10 / 10.0) + " }";
   Serial.println(pm_data);
   
   // === HTTPS Request ===
