@@ -28,6 +28,7 @@ void setup() {
       pm25 += data.PM_AE_UG_2_5;
       pm10 += data.PM_AE_UG_10_0;
       i++;
+      delay(1000);
     } else {
       pm_data = "{\"sensor_2_5\": 0, \"sensor_10\": 0}";
     }
@@ -37,7 +38,7 @@ void setup() {
   
   // === HTTPS Request ===
   HTTPClient http;
-  http.begin("http://pavetra.online/devices/data");
+  http.begin("https://pavetra.online/devices/data", "F5 1B 7D A0 A5 8E 9E 07 9E 9F 7E F9 0E 0E 8A BE 57 D1 9A 5A");
   http.addHeader("Authorization", "Token ***");
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(pm_data);
