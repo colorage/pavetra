@@ -17,7 +17,9 @@ void setup() {
   
   // === Connect to Internet ===
   WiFiManager wifiManager;
-  wifiManager.autoConnect("pavetra");  
+  wifiManager.setConfigPortalTimeout(120);
+  wifiManager.setTimeout(120);
+  wifiManager.autoConnect("pavetra");    
 
   // === Get PM data ===
   pms.wakeUp();
