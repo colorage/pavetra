@@ -16,18 +16,21 @@ void setup() {
   Serial.begin(9600);
   // === Connect to Internet ===
   WiFiManager wifiManager;
-  wifiManager.autoConnect("pavetra");  
+  wifiManager.setConfigPortalTimeout(120);
+  wifiManager.setTimeout(120);
+  wifiManager.autoConnect("pavetra");
+
   // === Get PM data ===
   pms.wakeUp();
 }
 
 void loop() {
-  delay(30*1000);  
+  delay(30*1000);
   readDataFromPMS();
   sendDataToServer();
   // === Sleep Mode ===
   pms.sleep();
-  ESP.deepSleep(20*60*1000*1000); // Sleep 20 minutes  
+  ESP.deepSleep(20*60*1000*1000); // Sleep 20 minutes
 }
 
 void readDataFromPMS() {
