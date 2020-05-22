@@ -52,7 +52,7 @@ void readDataFromPMS() {
 void sendDataToServer() {
   // === HTTPS Request ===
   HTTPClient http;
-  http.begin("https://pavetra.online/devices/data", "F5 1B 7D A0 A5 8E 9E 07 9E 9F 7E F9 0E 0E 8A BE 57 D1 9A 5A");
+  http.begin("https://pavetra.online/devices/data", "8E B6 79 2C 41 0B D7 5A C1 52 C6 2D 48 DA 6C 0B DD 2F FA 25");
   http.addHeader("Authorization", "Token ***");
   http.addHeader("Content-Type", "application/json");
   int httpCode = http.POST(pm_data);
